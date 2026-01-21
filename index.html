@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Portfolio</title>
+    <title>Our Portfolio - Modern Scroll Experience</title>
     <style>
+        /* ===== GLOBAL STYLES ===== */
         * {
             margin: 0;
             padding: 0;
@@ -13,265 +14,334 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
         }
 
-        /* Animated gradient background */
-        .background {
+        /* ===== BACKGROUND SYSTEM ===== */
+        /* Smooth background transitions between sections using scroll position */
+        .background-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            transition: background 1s ease;
+            z-index: -2;
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .gradient-1 {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* ===== FULL-SCREEN SECTIONS ===== */
+        /* Each section = 100vh for slide-like scrolling experience */
+        section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            scroll-snap-align: start;
         }
 
-        .gradient-2 {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .gradient-3 {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-
-        .gradient-4 {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-        }
-
-        .gradient-5 {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        }
-
-        /* Floating shapes */
-        .shape {
-            position: absolute;
-            opacity: 0.1;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .shape-1 {
-            width: 300px;
-            height: 300px;
-            background: white;
+        /* ===== SETTINGS BUTTON ===== */
+        /* Fixed top-right settings button - always visible */
+        .settings-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
         }
 
-        .shape-2 {
-            width: 200px;
-            height: 200px;
-            background: white;
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            bottom: 15%;
-            right: 15%;
-            animation-delay: 5s;
+        .settings-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
         }
 
-        .shape-3 {
-            width: 150px;
-            height: 150px;
-            background: white;
-            border-radius: 50%;
-            top: 60%;
-            left: 70%;
-            animation-delay: 10s;
+        /* ===== NEON GRADIENT BUTTON BORDERS ===== */
+        /* Animated flowing gradient borders like neon signs */
+        .portfolio-button {
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.95);
+            /* Neon gradient border effect */
+            border: 3px solid transparent;
+            background: linear-gradient(white, rgba(255,255,255,0.95)) padding-box,
+                        conic-gradient(from 0deg, #ff0080, #ff4d00, #ffff00, #00ff88, #0080ff, #ff0080) border-box;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            animation: neonFlow 3s linear infinite;
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-30px) rotate(180deg);
-            }
+        @keyframes neonFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
         }
 
-        /* Main container */
-        .container {
+        .portfolio-button:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ===== SECTION-SPECIFIC STYLES ===== */
+        .hero-content {
             text-align: center;
-            z-index: 1;
-            padding: 40px;
-            max-width: 800px;
-            width: 90%;
+            color: white;
+            animation: fadeInUp 1s ease;
         }
 
         h1 {
-            font-size: 3.5rem;
-            color: white;
+            font-size: 4rem;
             margin-bottom: 20px;
-            font-weight: 700;
-            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
-            animation: fadeInDown 1s ease;
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
         }
 
         .subtitle {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 60px;
-            font-weight: 300;
-            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 1s ease;
+            font-size: 1.4rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Portfolio buttons section - initially hidden, animate on scroll */
+        .portfolio-section .buttons-container {
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .portfolio-section.animate .buttons-container {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .buttons-container {
             display: flex;
-            gap: 30px;
-            justify-content: center;
+            gap: 40px;
             flex-wrap: wrap;
-            animation: fadeIn 1.5s ease;
+            justify-content: center;
         }
 
-        .portfolio-button {
-            background: rgba(255, 255, 255, 0.95);
-            border: none;
-            padding: 25px 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            color: #333;
-            display: inline-block;
+        /* About section */
+        .about-content {
+            max-width: 800px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .about-section.animate .about-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== MEDIA BACKGROUND SECTIONS ===== */
+        /* Split layout for video/image sections: media LEFT, content RIGHT */
+        .media-section {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .media-container {
+            width: 50%;
+            height: 100%;
             position: relative;
             overflow: hidden;
         }
 
-        .portfolio-button::before {
+        .media-container video, .media-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4) blur(2px); /* Dark overlay + subtle blur */
+        }
+
+        /* Vignette fade effect - darkens edges */
+        .media-container::after {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-            transition: left 0.5s ease;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.8) 100%);
+            pointer-events: none;
+            z-index: 1;
         }
 
-        .portfolio-button:hover::before {
-            left: 100%;
+        .content-container {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px;
+            color: white;
         }
 
-        .portfolio-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
+        /* ===== DARK GRADIENT FALLBACKS ===== */
+        .section-1 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+        .section-2 { background: linear-gradient(135deg, #0c0c1a 0%, #1a0d2e 50%, #2a0f4a 100%); }
+        .section-3 { background: linear-gradient(135deg, #0f1a1a 0%, #1a2e2e 50%, #2a4a4a 100%); }
 
-        .portfolio-button:active {
-            transform: translateY(-2px);
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        /* Smooth scrolling for full-screen sections */
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
         }
 
         /* Responsive design */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
+            .media-section {
+                flex-direction: column;
             }
-
-            .subtitle {
-                font-size: 1rem;
-                margin-bottom: 40px;
+            .media-container, .content-container {
+                width: 100%;
             }
-
             .buttons-container {
                 flex-direction: column;
                 gap: 20px;
             }
+            h1 { font-size: 2.5rem; }
+        }
 
-            .portfolio-button {
-                width: 100%;
-                max-width: 300px;
-            }
+        /* Fade animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <div class="background gradient-1" id="background"></div>
-    
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-    <div class="shape shape-3"></div>
+    <!-- ===== FIXED SETTINGS BUTTON ===== -->
+    <button class="settings-btn" onclick="toggleSettings()">⚙</button>
 
-    <div class="container">
-        <h1>Our Portfolio</h1>
-        <p class="subtitle">Explore our creative journey</p>
-        
-        <div class="buttons-container">
-            <a href="portfolio1.html" class="portfolio-button" id="portfolio1">Portfolio One</a>
-            <a href="portfolio2.html" class="portfolio-button" id="portfolio2">Portfolio Two</a>
+    <!-- ===== BACKGROUND CONTAINER ===== -->
+    <!-- Dynamically changes based on scroll position -->
+    <div class="background-container section-1" id="dynamic-bg"></div>
+
+    <!-- ===== SCROLL SECTIONS ===== -->
+    <!-- Section 1: Hero - Title only -->
+    <section class="section-1">
+        <div class="hero-content">
+            <h1>Our Portfolio</h1>
+            <p class="subtitle">Scroll to explore our creative journey</p>
         </div>
-    </div>
+    </section>
+
+    <!-- Section 2: Portfolio Buttons - Animate in from bottom -->
+    <section class="section-2 portfolio-section">
+        <div class="buttons-container">
+            <a href="portfolio1.html" class="portfolio-button">Portfolio One</a>
+            <a href="portfolio2.html" class="portfolio-button">Portfolio Two</a>
+        </div>
+    </section>
+
+    <!-- Section 3: About Us -->
+    <section class="section-3 about-section">
+        <div class="about-content">
+            <h2>About Our Work</h2>
+            <p>A collaborative school portfolio showcasing games, media, and creative projects. Scroll up for portfolios or continue exploring.</p>
+        </div>
+    </section>
 
     <script>
-        // Array of gradient classes
-        const gradients = ['gradient-1', 'gradient-2', 'gradient-3', 'gradient-4', 'gradient-5'];
-        const background = document.getElementById('background');
-        
-        // Pick a random gradient on load
-        function setRandomGradient() {
-            const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
-            background.className = 'background ' + randomGradient;
+        // ===== BACKGROUND CONFIGURATION =====
+        // Easy customization: Set paths for each section (1,2,3)
+        // Supported: JPEG, PNG for images; MP4 for videos
+        // Leave empty '' for dark gradient fallback
+        const sectionBackgrounds = {
+            1: '', // Section 1: Default dark gradient
+            2: 'videos/bg-section2.mp4', // Section 2: Example video path
+            3: 'images/about-bg.png'     // Section 3: Example image path (JPEG/PNG)
+        };
+
+        // ===== SCROLL ANIMATION SYSTEM =====
+        // Detects when sections enter viewport and triggers animations
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '-10% 0px -10% 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionIndex = entry.target.className.match(/section-(\d)/)?.[1];
+                    if (sectionIndex) {
+                        updateBackground(sectionIndex);
+                    }
+                    
+                    // Animate portfolio buttons and about section
+                    if (entry.target.classList.contains('portfolio-section')) {
+                        entry.target.classList.add('animate');
+                    } else if (entry.target.classList.contains('about-section')) {
+                        entry.target.classList.add('animate');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for scroll triggers
+        document.querySelectorAll('section').forEach(section => observer.observe(section));
+
+        // ===== DYNAMIC BACKGROUND SYSTEM =====
+        // Handles gradients, images, videos with dark overlay + vignette
+        function updateBackground(sectionNum) {
+            const bgContainer = document.getElementById('dynamic-bg');
+            const bgPath = sectionBackgrounds[sectionNum];
+
+            // Clear previous content
+            bgContainer.innerHTML = '';
+            bgContainer.className = 'background-container';
+
+            if (bgPath) {
+                // Media background (video/image)
+                if (bgPath.endsWith('.mp4')) {
+                    // Video support: Autoplay on scroll, loop silently
+                    const video = document.createElement('video');
+                    video.src = bgPath;
+                    video.autoplay = true;
+                    video.loop = true;
+                    video.muted = true;
+                    video.playsInline = true;
+                    bgContainer.appendChild(video);
+                } else if (bgPath.match(/\.(jpg|jpeg|png)$/i)) {
+                    // Image support: JPEG/PNG with blur + dark overlay
+                    const img = document.createElement('img');
+                    img.src = bgPath;
+                    img.style.cssText = 'width:100%;height:100%;object-fit:cover;filter:brightness(0.4) blur(2px);';
+                    bgContainer.appendChild(img);
+                }
+                bgContainer.classList.add('media-section');
+            } else {
+                // Dark gradient fallback
+                bgContainer.classList.add(`section-${sectionNum}`);
+            }
         }
-        
-        // Set random gradient on page load
-        setRandomGradient();
 
-        // Optional: Change gradient every 10 seconds for some variety
-        setInterval(setRandomGradient, 10000);
+        // ===== SETTINGS FUNCTIONALITY =====
+        // Toggle settings panel (expand later)
+        function toggleSettings() {
+            alert('Settings: Customize backgrounds in the JS config above!\nUpload media to images/ or videos/ folders.');
+        }
 
-        // Placeholder for future navigation - you'll replace these # with actual page URLs
-        document.getElementById('portfolio1').addEventListener('click', function(e) {
-            // Later you'll change this to: window.location.href = 'portfolio1.html';
-            console.log('Portfolio 1 clicked');
-        });
-
-        document.getElementById('portfolio2').addEventListener('click', function(e) {
-            // Later you'll change this to: window.location.href = 'portfolio2.html';
-            console.log('Portfolio 2 clicked');
-        });
+        // Initial background load
+        updateBackground(1);
     </script>
 </body>
 </html>
