@@ -76,21 +76,34 @@
         }
 
         /* FIXED IMAGE - DARK PURPLE GRADIENT */
-        .timeline-image {
-            flex-shrink: 0;
-            width: 350px;
-            height: 300px;
-            border-radius: 25px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-size: 4rem;
-            overflow: hidden;
-            margin-left: auto;
-        }
+        ..timeline-image {
+    /* ... your existing styles ... */
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+}
+
+.timeline-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* BLUR + EXTRA DARK OVERLAY */
+    background: 
+        linear-gradient(135deg, rgba(25,10,40,0.98) 0%, rgba(10,5,25,1) 100%),
+        var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    /* HEAVY BLUR */
+    filter: blur(8px) brightness(0.4) saturate(0.7);
+    border-radius: 25px;
+    z-index: 1;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
 
         .timeline-image::before {
             content: '';
