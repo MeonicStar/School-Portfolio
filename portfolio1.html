@@ -7,12 +7,13 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #0a0e1f 50%, #050a15 100%);
-            color: white;
-            line-height: 1.8;
-            overflow-x: hidden;
-        }
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* DARKER PURPLE NIGHT MODE */
+    background: linear-gradient(135deg, #0a0515 0%, #120a20 50%, #050215 100%);
+    color: white;
+    line-height: 1.8;
+    overflow-x: hidden;
+}
 
         .hero {
             height: 100vh;
@@ -93,48 +94,62 @@
             margin-left: auto;
         }
 
-        .timeline-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(15,15,35,0.9) 0%, rgba(10,14,31,0.95) 50%, rgba(5,10,21,1) 100%);
-            border-radius: 25px;
-            z-index: 1;
-            border: 2px solid transparent;
-            background-clip: padding-box;
-        }
+       /* DARK PURPLE GRADIENT IMAGES - NO ROTATION */
+.timeline-image {
+    flex-shrink: 0;
+    width: 350px;
+    height: 300px;
+    border-radius: 25px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 4rem;
+    overflow: hidden;
+    margin-left: auto;
+}
 
-        .timeline-image::after {
-            content: '';
-            position: absolute;
-            inset: 2px;
-            background: linear-gradient(45deg, #ff4757, #ffa502, #00ff88, #ff4757);
-            border-radius: 23px;
-            z-index: 2;
-            opacity: 0.6;
-            animation: borderRotate 4s linear infinite;
-        }
+.timeline-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* DARKER PURPLE GRADIENT */
+    background: linear-gradient(135deg, rgba(25,10,40,0.95) 0%, rgba(15,5,35,0.98) 50%, rgba(10,5,25,1) 100%);
+    border-radius: 25px;
+    z-index: 1;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
 
-        @keyframes borderRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+.timeline-image::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    /* DARK PURPLE BORDER */
+    background: linear-gradient(45deg, #8b5cf6, #6d28d9, #5b21b6, #7c3aed);
+    border-radius: 23px;
+    z-index: 2;
+    opacity: 0.7;
+}
 
-        .timeline-image > * {
-            position: relative;
-            z-index: 3;
-            font-size: 3rem;
-        }
+.timeline-image > * {
+    position: relative;
+    z-index: 3;
+    font-size: 3rem;
+}
 
-        .timeline-image small {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-top: 10px;
-            font-weight: 300;
-        }
+.timeline-image small {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 10px;
+    font-weight: 300;
+}
+
 
         .back-home {
             display: block;
