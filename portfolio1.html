@@ -1,10 +1,265 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Baller</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Your Name] - Developer Portfolio</title>
+    <style>
+        /* Same dark modern aesthetic as homepage */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Hero Section - Your personal intro */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            background: linear-gradient(45deg, #00ff88, #0080ff, #ff0080);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px #00ff88); }
+            to { filter: drop-shadow(0 0 30px #0080ff); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .skill-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ff88;
+            box-shadow: 0 20px 40px rgba(0,255,136,0.2);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(45deg, #00ff88, #0080ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            border-color: #ff0080;
+            box-shadow: 0 30px 60px rgba(255,0,128,0.3);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(45deg, #ff0080, #00ff88);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .tech-tag {
+            background: rgba(0,255,136,0.2);
+            color: #00ff88;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Back to Home Button */
+        .back-home {
+            display: inline-block;
+            margin: 40px auto;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #00ff88, #0080ff);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .back-home:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,255,136,0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .skills-grid, .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello World!</h1>
-    <p>This is my first brick.</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>[Your Name]</h1>
+        <p class="hero-subtitle">
+            Aspiring Developer | Cybersecurity Enthusiast | 
+            App Developer | Building the future one line of code at a time
+        </p>
+        <div style="font-size: 1.1rem; opacity: 0.8;">
+            Bongabon, Central Luzon, PH
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <div class="skills-grid">
+        <div class="skill-card">
+            <div class="skill-icon">💻</div>
+            <h3>Frontend</h3>
+            <p>HTML, CSS, JavaScript, Responsive Design</p>
+        </div>
+        <div class="skill-card">
+            <div class="skill-icon">🔒</div>
+            <h3>Cybersecurity</h3>
+            <p>Security concepts, Ethical hacking, Network security</p>
+        </div>
+        <div class="skill-card">
+            <div class="skill-icon">📱</div>
+            <h3>Mobile Apps</h3>
+            <p>Android development, App prototyping</p>
+        </div>
+        <div class="skill-card">
+            <div class="skill-icon">⚙️</div>
+            <h3>DevOps</h3>
+            <p>GitHub, Vercel, Netlify, Deployment automation</p>
+        </div>
+    </div>
+
+    <!-- Projects Section -->
+    <section class="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="project-image">Portfolio Homepage</div>
+                <div class="project-content">
+                    <h3 class="project-title">Interactive Portfolio Landing</h3>
+                    <p>Modern scroll-snap experience with neon animations, video backgrounds, and dynamic media loading.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">IntersectionObserver</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">🔐 Jigsaw Puzzle Game</div>
+                <div class="project-content">
+                    <h3 class="project-title">Interactive Jigsaw Puzzle</h3>
+                    <p>Canvas-based puzzle game with randomized images from media library. Unlock system planned.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Canvas API</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Image Processing</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">🚀 Platformer Game</div>
+                <div class="project-content">
+                    <h3 class="project-title">2D Platformer Prototype</h3>
+                    <p>Custom platforming game engine with physics, collision detection, and level design.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">HTML5 Canvas</span>
+                        <span class="tech-tag">Game Physics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Home -->
+    <a href="index.html" class="back-home">← Back to Our Portfolio</a>
 </body>
 </html>
