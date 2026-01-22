@@ -92,6 +92,37 @@
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
         }
 
+        /* Clickable link styling */
+        .secret-link {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .secret-link:hover {
+            color: #FFA500;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        .secret-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .secret-link:hover::after {
+            transform: scaleX(1);
+        }
+
         /* Music Control Button */
         .music-control {
             position: fixed;
@@ -216,8 +247,13 @@
         <p class="subtitle">Welcome to Ahsarah</p>
 
         <div class="content">
-            <p>Nayuta is Life</p>
-            <p>I have achieved nothing in this cycle of year wiht the exception of a new phone and a crippling addiction to Delta Force</p>
+            <!-- PASTE YOUR IMAGE URL FOR "NAYUTA" BELOW -->
+            <p><a href="C:\Users\HP\OneDrive\Pictures\ANother one\i-colored-a-panel-from-the-nayuta-oneshot-v0-eg4xsbq5numf1.jpg" target="_blank" class="secret-link">Nayuta</a> is Life</p>
+
+            <!-- PASTE YOUR IMAGE URL FOR "CRIPPLING ADDICTION" AND YOUR WORD DOC URL FOR "NOTHING" BELOW -->
+            <p>I have achieved <a href="YOUR-WORD-DOC-URL-HERE.docx" target="_blank" class="secret-link">nothing</a> in
+                this cycle of year with the exception of a new phone and a <a href="YOUR-ADDICTION-IMAGE-URL-HERE.jpg"
+                    target="_blank" class="secret-link">crippling addiction</a> to Delta Force</p>
         </div>
     </div>
 
