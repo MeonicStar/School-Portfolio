@@ -15,14 +15,11 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* IMAGE BACKGROUND - PASTE YOUR IMAGE URL IN THE url() BELOW */
+        /* IMAGE BACKGROUND - FIXED */
         .image-background {
             position: fixed;
             top: 0;
@@ -45,7 +42,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
             z-index: 1;
         }
 
@@ -53,15 +50,16 @@
         .container {
             text-align: center;
             z-index: 1;
-            padding: 40px;
-            max-width: 1000px;
-            width: 90%;
+            padding: 60px 40px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
         }
 
         h1 {
             font-size: 4rem;
             color: white;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             font-weight: 700;
             text-shadow: 3px 3px 20px rgba(0, 0, 0, 0.8);
             animation: fadeInDown 1s ease;
@@ -70,22 +68,22 @@
         .subtitle {
             font-size: 1.5rem;
             color: rgba(255, 255, 255, 0.95);
-            margin-bottom: 50px;
+            margin-bottom: 30px;
             font-weight: 300;
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
             animation: fadeInUp 1s ease;
         }
 
-        .content {
+        .intro-content {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 40px;
-            margin-top: 30px;
+            margin-bottom: 60px;
             animation: fadeIn 1.5s ease;
         }
 
-        .content p {
+        .intro-content p {
             color: white;
             font-size: 1.2rem;
             line-height: 1.8;
@@ -121,6 +119,73 @@
 
         .secret-link:hover::after {
             transform: scaleX(1);
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            margin-top: 80px;
+            padding-bottom: 80px;
+        }
+
+        .timeline-title {
+            font-size: 2.5rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 700;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
+            letter-spacing: 1px;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
+            align-items: center;
+            animation: fadeIn 1s ease;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 35px;
+            border-left: 5px solid #FFD700;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-content h3 {
+            color: #FFD700;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+            font-weight: 600;
+        }
+
+        .timeline-content p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        .timeline-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-image:hover {
+            transform: scale(1.05);
+        }
+
+        .timeline-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
         }
 
         /* Music Control Button */
@@ -204,6 +269,17 @@
         }
 
         /* Responsive design */
+        @media (max-width: 968px) {
+            .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .timeline-image img {
+                height: 300px;
+            }
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
@@ -213,7 +289,15 @@
                 font-size: 1.2rem;
             }
 
-            .content p {
+            .timeline-title {
+                font-size: 2rem;
+            }
+
+            .timeline-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .timeline-content p {
                 font-size: 1rem;
             }
 
@@ -221,6 +305,10 @@
             .music-control {
                 padding: 12px 20px;
                 font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 60px 20px 40px;
             }
         }
     </style>
@@ -246,14 +334,76 @@
         <h1>NiwaRhythm</h1>
         <p class="subtitle">Welcome to Ahsarah</p>
 
-        <div class="content">
-            <!-- PASTE YOUR IMAGE URL FOR "NAYUTA" BELOW -->
+        <div class="intro-content">
             <p><a href="images/Nayuta.jpg" target="_blank" class="secret-link">Nayuta</a> is Life</p>
+            <p>I have achieved nothing in this cycle of year with the exception of a new phone and a <a
+                    href="images/IMG_20250926_064046_1.jpg" target="_blank" class="secret-link">crippling addiction</a>
+                to Delta Force</p>
+        </div>
 
-            <!-- PASTE YOUR IMAGE URL FOR "CRIPPLING ADDICTION" AND YOUR WORD DOC URL FOR "NOTHING" BELOW -->
-            <p>I have achieved <a href="YOUR-WORD-DOC-URL-HERE.docx" target="_blank" class="secret-link">nothing</a> in
-                this cycle of year with the exception of a new phone and a <a href="images/IMG_20250926_064046_1.jpg"
-                    target="_blank" class="secret-link">crippling addiction</a> to Delta Force</p>
+        <!-- Timeline Section -->
+        <div class="timeline-section">
+            <h2 class="timeline-title">Christmas/New Year Vacation</h2>
+
+            <!-- Timeline Item 1: Playing on New Phone -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>A Quiet Celebration</h3>
+                    <p>My Christmas vacation was just nothing but me, myself, and I playing on my new phone. It was a
+                        time of relaxation and enjoying the simplicity of the holiday break with my newest companion.
+                    </p>
+                </div>
+                <div class="timeline-image">
+                    <!-- REPLACE WITH: images/image1.png or your actual image path -->
+                    <img src="images/image1.png" alt="New Phone">
+                </div>
+            </div>
+
+            <!-- Timeline Item 2: Mother's Birthday Dinner -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Mother's Special Night</h3>
+                    <p>During my vacation, we took our dearest mother to dinner in a fancy restaurant as a night out for
+                        her birthday. During this special and cheerful occasion, we took our time and had a good family
+                        bonding time.</p>
+                </div>
+                <div class="timeline-image">
+                    <!-- REPLACE WITH: images/image2.png or your actual image path -->
+                    <img src="images/image2.png" alt="Mother's Birthday Dinner">
+                </div>
+            </div>
+
+            <!-- Timeline Item 3: The Gift and The Test -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>A Gift of Trust</h3>
+                    <p>My dearest parents have gifted me a brand new phone. This act is a gift as it is also a test for
+                        me to show if I were even worthy of it. And so I've worked hard these past few weeks to prove
+                        that I am capable of such a phone that some may see as "expensive" and some might say
+                        "cheap/budget phone".</p>
+                </div>
+                <div class="timeline-image">
+                    <!-- REPLACE WITH: images/image3.jpeg or your actual image path -->
+                    <img src="images/image3.jpeg" alt="Brand New Phone Gift">
+                </div>
+            </div>
+
+            <!-- Timeline Item 4: BSU Examination -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>The Greatest Hurdle</h3>
+                    <p>My greatest hurdle in my vacation was the college examination of Benguet State University. Though
+                        my fellow classmates were there and fellow acquaintances, my nervousness has been non-stop. Our
+                        examination that day was on a Sunday, so after church I immediately went to the venue to group
+                        up with my friends and classmates to wait for the impending examination with a strong will to
+                        pass and succeed in an exam with very limited time to answer.</p>
+                </div>
+                <div class="timeline-image">
+                    <!-- REPLACE WITH: images/image3.jpeg or a different exam image -->
+                    <img src="images/image3.jpeg" alt="BSU Examination">
+                </div>
+            </div>
+
         </div>
     </div>
 
