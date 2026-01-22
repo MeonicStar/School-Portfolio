@@ -6,12 +6,21 @@
     <title>Jerry Tom - Christmas/New Year Vacation</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* MEWING.JPG = FULL PAGE BACKGROUND */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0515 0%, #120a20 50%, #050215 100%);
+            /* YOUR IMAGE + DARK OVERLAY */
+            background: 
+                linear-gradient(rgba(10,5,21,0.97), rgba(18,10,32,0.98)),
+                url('images/mewing.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: white;
             line-height: 1.8;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
         .hero {
@@ -22,6 +31,9 @@
             justify-content: center;
             text-align: center;
             padding: 0 20px;
+            /* EXTRA DARK OVERLAY FOR READABILITY */
+            background: rgba(10,5,21,0.3);
+            backdrop-filter: blur(2px);
         }
 
         .hero h1 {
@@ -38,7 +50,6 @@
             to { filter: drop-shadow(0 0 30px #00ff88); }
         }
 
-        /* FIXED TIMELINE LAYOUT */
         .timeline-entry {
             display: flex;
             align-items: flex-start;
@@ -49,6 +60,10 @@
             opacity: 0;
             transform: translateY(50px);
             transition: all 0.8s ease;
+            /* SEMI-TRANSPARENT BACKGROUND */
+            background: rgba(10,5,21,0.7);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
         }
 
         .timeline-entry.animate {
@@ -76,6 +91,7 @@
             opacity: 0.95;
         }
 
+        /* PURPLE GLOW IMAGE CARDS */
         .timeline-image {
             flex-shrink: 0;
             width: 350px;
@@ -92,7 +108,18 @@
             margin-left: auto;
         }
 
-        /* PURPLE GLOW BORDER */
+        .timeline-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(25,10,40,0.95) 0%, rgba(15,5,35,0.98) 50%, rgba(10,5,25,1) 100%);
+            border-radius: 25px;
+            z-index: 1;
+        }
+
         .timeline-image::after {
             content: '';
             position: absolute;
@@ -128,6 +155,7 @@
             font-weight: 600;
             font-size: 1.1rem;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .back-home:hover {
@@ -165,27 +193,16 @@
         </p>
     </section>
 
-    <!-- FIRST TIMELINE - YOUR BLURRED MEWING IMAGE -->
+    <!-- ALL TIMELINE ENTRIES -->
     <div class="timeline-entry">
         <div class="timeline-text">
             <h2>🏡 Back to the Province</h2>
             <p>I would first like to say that my time spent during Christmas and New Year's was fairly uneventful. I did what most Filipinos do - I went back to our provinces and visited my lola as well as my friends that I long have not seen in person.</p>
             <p>Not much had happened during my time at my hometown. It was relatively peaceful compared to La Trinidad. There was no constant noise from cars passing by, the days were always sunny, and people were just doing their everyday work with no rush. It felt like time was slower and people were content with life.</p>
         </div>
-        <div class="timeline-image" style="
-            background: 
-                linear-gradient(135deg, rgba(25,10,40,0.95), rgba(10,5,25,1)),
-                url('images/mewing.jpg');
-            background-size: cover, cover;
-            background-position: center, center;
-            background-repeat: no-repeat;
-        ">
-            🌾
-            <small>Rice fields & mewing vibes</small>
-        </div>
+        <div class="timeline-image">🌾<small>Rice fields & hometown peace</small></div>
     </div>
 
-    <!-- OTHER ENTRIES (emoji only) -->
     <div class="timeline-entry">
         <div class="timeline-text">
             <h2>🎄 Christmas Family Dinner</h2>
