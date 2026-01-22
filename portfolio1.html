@@ -257,17 +257,19 @@
     <small>Family moments video</small>
 </div>
 
+    <div class="timeline-entry">
+    <div class="timeline-text">
+        <h2>A Simple End</h2>
+        <p>I wouldn't say that my time spent at my hometown was boring but it was a stress relief...</p>
+        <p>It was comforting to say the least... Thank you for reading my story and have a nice day.</p>
     </div>
+    <!-- FIXED VIDEO FINAL TIMELINE -->
+    <div class="timeline-image video-bg" data-video="videos/Ithink.mp4">
+        ❤️
+        <small>Family moments video</small>
+    </div>
+</div>
 
-    <a href="index.html" class="back-home">← Back to Our Vacation Portfolio</a>
-
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                }
             });
         });
         document.querySelectorAll('.timeline-entry').forEach(entry => {
