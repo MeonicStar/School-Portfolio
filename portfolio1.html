@@ -245,75 +245,77 @@
         <div class="timeline-image">🎇<small>New Year 2026</small></div>
     </div>
 
-    <div class="timeline-entry">
-        <div class="timeline-text">
-            <h2>A Simple End</h2>
-            <p>I wouldn't say that my time spent at my hometown was boring but it was a stress relief as I took back my time, slowed down, took care of my health, and talked to my friends and family that I have much neglected when I was at school focused on my academics.</p>
-            <p>It was comforting to say the least that I had a much better vacation here in my hometown than staying at our house at La Trinidad playing games all day with nothing much to do. Thank you for reading my story and have a nice day.</p>
-        </div>
-        <!-- VIDEO FINAL TIMELINE -->
-<div class="timeline-image video-bg" data-video="/videos/Ithink.mp4">
-    ❤️
-    <small>Family moments video</small>
-</div>
-
-    <div class="timeline-entry">
+ <div class="timeline-entry">
     <div class="timeline-text">
         <h2>A Simple End</h2>
-        <p>I wouldn't say that my time spent at my hometown was boring but it was a stress relief...</p>
-        <p>It was comforting to say the least... Thank you for reading my story and have a nice day.</p>
+        <p>I wouldn't say that my time spent at my hometown was boring but it was a stress relief as I took back my time, slowed down, took care of my health, and talked to my friends and family that I have much neglected when I was at school focused on my academics.</p>
+        <p>It was comforting to say the least that I had a much better vacation here in my hometown than staying at our house at La Trinidad playing games all day with nothing much to do. Thank you for reading my story and have a nice day.</p>
     </div>
-    <!-- FIXED VIDEO FINAL TIMELINE -->
+    <!-- PERFECT VIDEO TIMELINE -->
     <div class="timeline-image video-bg" data-video="videos/Ithink.mp4">
         ❤️
         <small>Family moments video</small>
     </div>
 </div>
 
-            });
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+            }
         });
-        document.querySelectorAll('.timeline-entry').forEach(entry => {
-            observer.observe(entry);
-        });
+    });
+    document.querySelectorAll('.timeline-entry').forEach(entry => {
+        observer.observe(entry);
+    });
 
-        let player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('bgMusic', {
-                events: { 'onReady': onPlayerReady }
-            });
+    // YouTube music
+    let player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('bgMusic', {
+            events: { 'onReady': onPlayerReady }
+        });
+    }
+    function onPlayerReady(event) { event.target.playVideo(); }
+
+    // Music toggle
+    document.getElementById('musicToggle').onclick = function() {
+        const btn = this;
+        if (player && player.getPlayerState() === 1) {
+            player.pauseVideo();
+            btn.innerHTML = '🔇';
+            btn.style.background = 'linear-gradient(45deg, #666, #444)';
+        } else if (player) {
+            player.playVideo();
+            btn.innerHTML = '🔊';
+            btn.style.background = 'linear-gradient(45deg, #ff4757, #ffa502)';
         }
-        function onPlayerReady(event) { event.target.playVideo(); }
+    };
 
-        document.getElementById('musicToggle').onclick = function() {
-            const btn = this;
-            if (player && player.getPlayerState() === 1) {
-                player.pauseVideo();
-                btn.innerHTML = '🔇';
-                btn.style.background = 'linear-gradient(45deg, #666, #444)';
-            } else if (player) {
-                player.playVideo();
-                btn.innerHTML = '🔊';
-                btn.style.background = 'linear-gradient(45deg, #ff4757, #ffa502)';
-            }
-        };
+    // Auto-start music
+    document.addEventListener('click', function startMusic() {
+        if (player && player.getPlayerState() !== 1) {
+            player.playVideo();
+            document.removeEventListener('click', startMusic);
+        }
+    }, { once: true });
 
-        document.addEventListener('click', function startMusic() {
-            if (player && player.getPlayerState() !== 1) {
-                player.playVideo();
-                document.removeEventListener('click', startMusic);
-            }
-        }, { once: true });
-        // VIDEO TIMELINE - Load videos
-document.querySelectorAll('.video-bg').forEach(container => {
-    const video = document.createElement('video');
-    video.src = container.dataset.video;
-    video.autoplay = true;
-    video.loop = true;
-    video.muted = true;
-    video.playsInline = true;
-    container.appendChild(video);
-});
+    // VIDEO TIMELINE - Load videos when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.video-bg').forEach(container => {
+            const video = document.createElement('video');
+            video.src = container.dataset.video;
+            video.autoplay = true;
+            video.loop = true;
+            video.muted = true;
+            video.playsInline = true;
+            container.appendChild(video);
+        });
+    });
+</script>
 
-    </script>
 </body>
 </html>
