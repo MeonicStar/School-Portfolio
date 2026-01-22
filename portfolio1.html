@@ -7,13 +7,12 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* DARKER PURPLE NIGHT MODE */
-    background: linear-gradient(135deg, #0a0515 0%, #120a20 50%, #050215 100%);
-    color: white;
-    line-height: 1.8;
-    overflow-x: hidden;
-}
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0515 0%, #120a20 50%, #050215 100%);
+            color: white;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
 
         .hero {
             height: 100vh;
@@ -39,7 +38,6 @@
             to { filter: drop-shadow(0 0 30px #00ff88); }
         }
 
-        /* TIMELINE LAYOUT - TEXT ALWAYS LEFT */
         .timeline-entry {
             display: flex;
             align-items: flex-start;
@@ -77,7 +75,7 @@
             opacity: 0.95;
         }
 
-        /* DARK GRADIENT IMAGES - ALWAYS RIGHT */
+        /* FIXED IMAGE - DARK PURPLE GRADIENT */
         .timeline-image {
             flex-shrink: 0;
             width: 350px;
@@ -94,62 +92,42 @@
             margin-left: auto;
         }
 
-       /* DARK PURPLE GRADIENT IMAGES - NO ROTATION */
-.timeline-image {
-    flex-shrink: 0;
-    width: 350px;
-    height: 300px;
-    border-radius: 25px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 4rem;
-    overflow: hidden;
-    margin-left: auto;
-}
+        .timeline-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(25,10,40,0.95) 0%, rgba(15,5,35,0.98) 50%, rgba(10,5,25,1) 100%);
+            border-radius: 25px;
+            z-index: 1;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
 
-.timeline-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    /* DARKER PURPLE GRADIENT */
-    background: linear-gradient(135deg, rgba(25,10,40,0.95) 0%, rgba(15,5,35,0.98) 50%, rgba(10,5,25,1) 100%);
-    border-radius: 25px;
-    z-index: 1;
-    border: 2px solid transparent;
-    background-clip: padding-box;
-}
+        .timeline-image::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: linear-gradient(45deg, #8b5cf6, #6d28d9, #5b21b6, #7c3aed);
+            border-radius: 23px;
+            z-index: 2;
+            opacity: 0.7;
+        }
 
-.timeline-image::after {
-    content: '';
-    position: absolute;
-    inset: 2px;
-    /* DARK PURPLE BORDER */
-    background: linear-gradient(45deg, #8b5cf6, #6d28d9, #5b21b6, #7c3aed);
-    border-radius: 23px;
-    z-index: 2;
-    opacity: 0.7;
-}
+        .timeline-image > * {
+            position: relative;
+            z-index: 3;
+            font-size: 3rem;
+        }
 
-.timeline-image > * {
-    position: relative;
-    z-index: 3;
-    font-size: 3rem;
-}
-
-.timeline-image small {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin-top: 10px;
-    font-weight: 300;
-}
-
+        .timeline-image small {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 10px;
+            font-weight: 300;
+        }
 
         .back-home {
             display: block;
@@ -185,21 +163,20 @@
     </style>
 </head>
 <body>
-  <!-- YOUTUBE MUSIC + CONTROL (Bottom Right) -->
-<div id="music-container" style="position: fixed; top: -1000px; left: -1000px; width: 1px; height: 1px; z-index: -1;">
-    <!-- CHANGE dQw4w9WgXcQ to your Christmas song VIDEO ID -->
-    <iframe id="bgMusic" src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&autoplay=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&showinfo=0&rel=0&iv_load_policy=3" frameborder="0" width="1" height="1" allow="autoplay; encrypted-media"></iframe>
-</div>
+    <!-- YOUTUBE MUSIC -->
+    <div style="position: fixed; top: -1000px; left: -1000px; width: 1px; height: 1px; z-index: -1;">
+        <iframe id="bgMusic" src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&autoplay=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&showinfo=0&rel=0&iv_load_policy=3" frameborder="0" width="1" height="1" allow="autoplay; encrypted-media"></iframe>
+    </div>
 
-<!-- MUSIC TOGGLE BUTTON - BOTTOM RIGHT -->
-<button id="musicToggle" onclick="toggleMusic()" style="
-    position: fixed; bottom: 30px; right: 30px; 
-    width: 60px; height: 60px; border-radius: 50%;
-    background: linear-gradient(45deg, #ff4757, #ffa502);
-    border: none; color: white; font-size: 1.4rem;
-    cursor: pointer; z-index: 1000; box-shadow: 0 10px 25px rgba(255,71,87,0.4);
-    transition: all 0.3s ease; opacity: 0.9;
-">🔊</button>
+    <!-- MUSIC BUTTON -->
+    <button id="musicToggle" style="
+        position: fixed; bottom: 30px; right: 30px; 
+        width: 60px; height: 60px; border-radius: 50%;
+        background: linear-gradient(45deg, #ff4757, #ffa502);
+        border: none; color: white; font-size: 1.4rem;
+        cursor: pointer; z-index: 1000; box-shadow: 0 10px 25px rgba(255,71,87,0.4);
+        transition: all 0.3s ease;
+    ">🔊</button>
 
     <!-- Hero -->
     <section class="hero">
@@ -209,17 +186,14 @@
         </p>
     </section>
 
-    <!-- TIMELINE ENTRIES - TEXT LEFT, IMAGE RIGHT -->
+    <!-- TIMELINE -->
     <div class="timeline-entry">
         <div class="timeline-text">
             <h2>🏡 Back to the Province</h2>
             <p>I would first like to say that my time spent during Christmas and New Year's was fairly uneventful. I did what most Filipinos do - I went back to our provinces and visited my lola as well as my friends that I long have not seen in person.</p>
             <p>Not much had happened during my time at my hometown. It was relatively peaceful compared to La Trinidad. There was no constant noise from cars passing by, the days were always sunny, and people were just doing their everyday work with no rush. It felt like time was slower and people were content with life.</p>
         </div>
-        <div class="timeline-image">
-            🌾
-            <small>Rice fields & hometown peace</small>
-        </div>
+        <div class="timeline-image">🌾<small>Rice fields & hometown peace</small></div>
     </div>
 
     <div class="timeline-entry">
@@ -228,10 +202,7 @@
             <p>When Christmas came, my family and cousins came together and I went and helped out in preparing food. It was nothing much, just some simple dinner like spaghetti, barbecues, and different kinds of cooked chicken to accommodate our picky younger cousins and elderly.</p>
             <p>When it came time to eat, my cousins and elders naturally came together and caught up with each other as they talked about their lives. The same goes for me and my cousins that are around my age as we discussed changes that happened at my hometown and stories of what they have previously been through.</p>
         </div>
-        <div class="timeline-image">
-            🍝
-            <small>Spaghetti & family laughs</small>
-        </div>
+        <div class="timeline-image">🍝<small>Spaghetti & family laughs</small></div>
     </div>
 
     <div class="timeline-entry">
@@ -240,10 +211,7 @@
             <p>After our party came to an end and some couple of days passed by, my cousin invited me to go on a swimming trip with them. Naturally, I agreed and went with them. What I did not know was that he was to be baptized as well so naturally I was a little shocked and surprised.</p>
             <p>After that happened we naturally enjoyed our time at the pool and went home. It was a perfect unexpected adventure during the holidays.</p>
         </div>
-        <div class="timeline-image">
-            💧
-            <small>Pool day & baptism</small>
-        </div>
+        <div class="timeline-image">💧<small>Pool day & baptism</small></div>
     </div>
 
     <div class="timeline-entry">
@@ -251,10 +219,7 @@
             <h2>🥂 New Year's Reflection</h2>
             <p>While December passed by and the New Year came we had another party at my cousin's home. I had a productive discussion about what we wanted to do and the future and what our plans for this new year. After which I stayed at our house and played with my brothers to pass the days until school was near.</p>
         </div>
-        <div class="timeline-image">
-            🎇
-            <small>New Year 2026</small>
-        </div>
+        <div class="timeline-image">🎇<small>New Year 2026</small></div>
     </div>
 
     <div class="timeline-entry">
@@ -263,15 +228,15 @@
             <p>I wouldn't say that my time spent at my hometown was boring but it was a stress relief as I took back my time, slowed down, took care of my health, and talked to my friends and family that I have much neglected when I was at school focused on my academics.</p>
             <p>It was comforting to say the least that I had a much better vacation here in my hometown than staying at our house at La Trinidad playing games all day with nothing much to do. Thank you for reading my story and have a nice day.</p>
         </div>
-        <div class="timeline-image">
-            ❤️
-            <small>Family time</small>
-        </div>
+        <div class="timeline-image">❤️<small>Family time</small></div>
     </div>
 
     <a href="index.html" class="back-home">← Back to Our Vacation Portfolio</a>
 
+    <!-- SCRIPTS -->
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+        // Scroll animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -282,44 +247,37 @@
         document.querySelectorAll('.timeline-entry').forEach(entry => {
             observer.observe(entry);
         });
-    </script>
-    <script src="https://www.youtube.com/iframe_api"></script>
-<script>
-let player;
 
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('bgMusic', {
-        events: {
-            'onReady': onPlayerReady
+        // Music player
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('bgMusic', {
+                events: { 'onReady': onPlayerReady }
+            });
         }
-    });
-}
+        function onPlayerReady(event) { event.target.playVideo(); }
 
-function onPlayerReady(event) {
-    event.target.playVideo();
-}
+        // Music toggle
+        document.getElementById('musicToggle').onclick = function() {
+            const btn = this;
+            if (player && player.getPlayerState() === 1) {
+                player.pauseVideo();
+                btn.innerHTML = '🔇';
+                btn.style.background = 'linear-gradient(45deg, #666, #444)';
+            } else if (player) {
+                player.playVideo();
+                btn.innerHTML = '🔊';
+                btn.style.background = 'linear-gradient(45deg, #ff4757, #ffa502)';
+            }
+        };
 
-function toggleMusic() {
-    const btn = document.getElementById('musicToggle');
-    
-    if (player && player.getPlayerState() === 1) { // Playing
-        player.pauseVideo();
-        btn.innerHTML = '🔇';
-        btn.style.background = 'linear-gradient(45deg, #666, #444)';
-    } else if (player) { // Paused
-        player.playVideo();
-        btn.innerHTML = '🔊';
-        btn.style.background = 'linear-gradient(45deg, #ff4757, #ffa502)';
-    }
-}
-
-// Auto-play on first interaction (browser policy)
-document.addEventListener('click', function startMusic() {
-    if (player && player.getPlayerState() !== 1) {
-        player.playVideo();
-        document.removeEventListener('click', startMusic);
-    }
-}, { once: true });
-</script>
+        // Auto-play on first click
+        document.addEventListener('click', function startMusic() {
+            if (player && player.getPlayerState() !== 1) {
+                player.playVideo();
+                document.removeEventListener('click', startMusic);
+            }
+        }, { once: true });
+    </script>
 </body>
 </html>
