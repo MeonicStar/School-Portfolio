@@ -7,7 +7,6 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        /* MEWING.JPG = FULL PAGE BACKGROUND */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-image: url('images/mewing.jpg');
@@ -86,7 +85,6 @@
             opacity: 0.95;
         }
 
-        /* CLEAN TIMELINE IMAGES - NO BOXES, NO CAPTIONS */
         .timeline-image {
             flex-shrink: 0;
             width: 350px;
@@ -100,17 +98,19 @@
             overflow: hidden;
             margin-left: auto;
             background: rgba(10,5,25,0.6);
+            position: relative;
         }
 
         .timeline-image video {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             border-radius: 25px;
         }
 
-        /* NO CAPTIONS */
         .timeline-image small { display: none !important; }
 
         .back-home {
@@ -153,7 +153,7 @@
         <iframe id="bgMusic" src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&autoplay=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&showinfo=0&rel=0&iv_load_policy=3" frameborder="0" width="1" height="1" allow="autoplay; encrypted-media"></iframe>
     </div>
 
-    <button id="musicToggle" style="position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(45deg, #ff4757, #ffa502); border: none; color: white; font-size: 1.4rem; cursor: pointer; z-index: 1000; box-shadow: 0 10px 25px rgba(255,71,87,0.4); transition: all 0.3s ease;">🔊</button>
+    <button id="musicToggle" style="position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(45deg, #ff4757, #ffa502); border: none; color: white; font-size: 1.4rem; cursor: pointer; z-index: 1000; box-shadow: 0 10px 25px rgba(255,71,87,0.4); transition: all 0.3s ease;" onclick="toggleMusic()">🔊</button>
 
     <!-- Hero -->
     <section class="hero">
@@ -163,7 +163,7 @@
         </p>
     </section>
 
-    <!-- CLEAN TIMELINE ENTRIES -->
+    <!-- TIMELINE 1 -->
     <div class="timeline-entry">
         <div class="timeline-text">
             <h2>Back to the Province</h2>
@@ -173,8 +173,74 @@
         <div class="timeline-image">🌾</div>
     </div>
 
+    <!-- TIMELINE 2 -->
     <div class="timeline-entry">
         <div class="timeline-text">
             <h2>Christmas Family Dinner</h2>
             <p>When Christmas came, my family and cousins came together and I went and helped out in preparing food. It was nothing much, just some simple dinner like spaghetti, barbecues, and different kinds of cooked chicken to accommodate our picky younger cousins and elderly.</p>
-            <p
+            <p>When it came time to eat, my cousins and elders naturally came together and caught up with each other as they talked about their lives. The same goes for me and my cousins that are around my age as we discussed changes that happened at my hometown and stories of what they have previously been through.</p>
+        </div>
+        <div class="timeline-image">🍝</div>
+    </div>
+
+    <!-- TIMELINE 3 -->
+    <div class="timeline-entry">
+        <div class="timeline-text">
+            <h2>Surprising Swim</h2>
+            <p>After our party came to an end and some couple of days passed by, my cousin invited me to go on a swimming trip with them. Naturally, I agreed and went with them. What I did not know was that he was to be baptized as well so naturally I was a little shocked and surprised.</p>
+            <p>After that happened we naturally enjoyed our time at the pool and went home. It was a perfect unexpected adventure during the holidays.</p>
+        </div>
+        <div class="timeline-image">💧</div>
+    </div>
+
+    <!-- TIMELINE 4 -->
+    <div class="timeline-entry">
+        <div class="timeline-text">
+            <h2>A New Year's Reflection</h2>
+            <p>While December passed by and the New Year came we had another party at my cousin's home. I had a productive discussion about what we wanted to do and the future and what our plans for this new year.</p>
+            <p>After which I stayed at our house and played with my brothers to pass the days until school was near.</p>
+        </div>
+        <div class="timeline-image">🎇</div>
+    </div>
+
+    <!-- FINAL TIMELINE -->
+    <div class="timeline-entry">
+        <div class="timeline-text">
+            <h2>A Simple End</h2>
+            <p>I wouldn't call it an amazing vacation, but it was peaceful and exactly what I needed after a stressful semester. Simple moments with family and friends made it memorable.</p>
+            <p>Now back to reality and schoolwork, but with good memories and a refreshed mind. 🏠✨</p>
+        </div>
+        <div class="timeline-image">🏠</div>
+    </div>
+
+    <a href="/" class="back-home">← Back Home</a>
+
+    <script>
+        // Animate timeline entries on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        });
+
+        document.querySelectorAll('.timeline-entry').forEach(entry => {
+            observer.observe(entry);
+        });
+
+        // Music toggle
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            const btn = document.getElementById('musicToggle');
+            if (music.src.includes('dQw4w9WgXcQ')) {
+                music.src = music.src.replace('dQw4w9WgXcQ', 'dQw4w9WgXcQ?enablejsapi=1');
+                btn.textContent = '🔇';
+            } else {
+                music.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&autoplay=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&showinfo=0&rel=0&iv_load_policy=3";
+                btn.textContent = '🔊';
+            }
+        }
+    </script>
+</body>
+</html>
