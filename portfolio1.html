@@ -140,6 +140,24 @@
             margin-top: 10px;
             font-weight: 300;
         }
+        /* VIDEO BACKGROUND FOR TIMELINE */
+.timeline-image video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 25px;
+    z-index: 0;
+}
+
+.timeline-image > *:not(video) {
+    position: relative;
+    z-index: 3;
+    font-size: 3rem;
+}
+
 
         .back-home {
             display: block;
@@ -233,7 +251,12 @@
             <p>I wouldn't say that my time spent at my hometown was boring but it was a stress relief as I took back my time, slowed down, took care of my health, and talked to my friends and family that I have much neglected when I was at school focused on my academics.</p>
             <p>It was comforting to say the least that I had a much better vacation here in my hometown than staying at our house at La Trinidad playing games all day with nothing much to do. Thank you for reading my story and have a nice day.</p>
         </div>
-        <div class="timeline-image">❤️<small>Family time</small></div>
+        <!-- VIDEO FINAL TIMELINE -->
+<div class="timeline-image video-bg" data-video="/videos/Ithink.mp4">
+    ❤️
+    <small>Family moments video</small>
+</div>
+
     </div>
 
     <a href="index.html" class="back-home">← Back to Our Vacation Portfolio</a>
@@ -278,6 +301,17 @@
                 document.removeEventListener('click', startMusic);
             }
         }, { once: true });
+        // VIDEO TIMELINE - Load videos
+document.querySelectorAll('.video-bg').forEach(container => {
+    const video = document.createElement('video');
+    video.src = container.dataset.video;
+    video.autoplay = true;
+    video.loop = true;
+    video.muted = true;
+    video.playsInline = true;
+    container.appendChild(video);
+});
+
     </script>
 </body>
 </html>
