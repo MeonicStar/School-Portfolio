@@ -8,9 +8,9 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, #0f0f23 0%, #0a0e1f 50%, #050a15 100%);
             color: white;
-            line-height: 1.7;
+            line-height: 1.8;
             overflow-x: hidden;
         }
 
@@ -38,69 +38,108 @@
             to { filter: drop-shadow(0 0 30px #00ff88); }
         }
 
-        /* SPLIT LAYOUT - TEXT LEFT + IMAGE RIGHT */
-        .split-container {
+        /* TIMELINE LAYOUT - TEXT ALWAYS LEFT */
+        .timeline-entry {
             display: flex;
-            gap: 40px;
+            align-items: flex-start;
+            gap: 60px;
             max-width: 1200px;
-            margin: 80px auto;
+            margin: 100px auto;
             padding: 0 20px;
             opacity: 0;
             transform: translateY(50px);
             transition: all 0.8s ease;
         }
 
-        .split-container.animate {
+        .timeline-entry.animate {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .text-block {
+        .timeline-text {
             flex: 1;
-            background: rgba(255,255,255,0.05);
-            padding: 40px;
-            border-radius: 25px;
-            border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            max-width: 600px;
         }
 
-        .text-block h2 {
-            font-size: 2rem;
+        .timeline-text h2 {
+            font-size: 2.2rem;
             background: linear-gradient(45deg, #ff4757, #ffa502);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 25px;
+            font-weight: 300;
         }
 
-        .image-block {
-            flex: 1;
-            height: 400px;
+        .timeline-text p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        /* DARK GRADIENT IMAGES - ALWAYS RIGHT */
+        .timeline-image {
+            flex-shrink: 0;
+            width: 350px;
+            height: 300px;
             border-radius: 25px;
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            border: 2px solid rgba(255,255,255,0.2);
             font-size: 4rem;
-            transition: all 0.3s ease;
+            overflow: hidden;
+            margin-left: auto;
         }
 
-        .image-block:hover {
-            transform: scale(1.02);
-            border-color: #00ff88;
-            box-shadow: 0 20px 40px rgba(0,255,136,0.3);
+        .timeline-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(15,15,35,0.9) 0%, rgba(10,14,31,0.95) 50%, rgba(5,10,21,1) 100%);
+            border-radius: 25px;
+            z-index: 1;
+            border: 2px solid transparent;
+            background-clip: padding-box;
         }
 
-        .reverse {
-            flex-direction: row-reverse;
+        .timeline-image::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: linear-gradient(45deg, #ff4757, #ffa502, #00ff88, #ff4757);
+            border-radius: 23px;
+            z-index: 2;
+            opacity: 0.6;
+            animation: borderRotate 4s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .timeline-image > * {
+            position: relative;
+            z-index: 3;
+            font-size: 3rem;
+        }
+
+        .timeline-image small {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 10px;
+            font-weight: 300;
         }
 
         .back-home {
             display: block;
             width: max-content;
-            margin: 60px auto;
+            margin: 80px auto;
             padding: 15px 40px;
             background: linear-gradient(45deg, #ff4757, #ffa502);
             color: white;
@@ -116,29 +155,36 @@
             box-shadow: 0 15px 30px rgba(255,71,87,0.4);
         }
 
-        @media (max-width: 768px) {
-            .split-container { 
+        @media (max-width: 900px) {
+            .timeline-entry { 
                 flex-direction: column; 
-                margin: 40px auto;
+                gap: 40px;
+                margin: 60px auto;
             }
-            .image-block { 
-                height: 250px; 
-                font-size: 2.5rem;
+            .timeline-image { 
+                width: 100%; 
+                max-width: 400px;
+                height: 250px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- INVISIBLE YOUTUBE MUSIC -->
-<div style="position: fixed; top: -1000px; left: -1000px; width: 1px; height: 1px; z-index: -1;">
-    <iframe 
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&showinfo=0&rel=0" 
-        frameborder="0" 
-        width="1" 
-        height="1" 
-        allow="autoplay; encrypted-media">
-    </iframe>
+  <!-- YOUTUBE MUSIC + CONTROL (Bottom Right) -->
+<div id="music-container" style="position: fixed; top: -1000px; left: -1000px; width: 1px; height: 1px; z-index: -1;">
+    <!-- CHANGE dQw4w9WgXcQ to your Christmas song VIDEO ID -->
+    <iframe id="bgMusic" src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&autoplay=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&showinfo=0&rel=0&iv_load_policy=3" frameborder="0" width="1" height="1" allow="autoplay; encrypted-media"></iframe>
 </div>
+
+<!-- MUSIC TOGGLE BUTTON - BOTTOM RIGHT -->
+<button id="musicToggle" onclick="toggleMusic()" style="
+    position: fixed; bottom: 30px; right: 30px; 
+    width: 60px; height: 60px; border-radius: 50%;
+    background: linear-gradient(45deg, #ff4757, #ffa502);
+    border: none; color: white; font-size: 1.4rem;
+    cursor: pointer; z-index: 1000; box-shadow: 0 10px 25px rgba(255,71,87,0.4);
+    transition: all 0.3s ease; opacity: 0.9;
+">🔊</button>
 
     <!-- Hero -->
     <section class="hero">
@@ -148,65 +194,69 @@
         </p>
     </section>
 
-    <!-- SPLIT SECTIONS WITH YOUR EXACT TEXT -->
-    <div class="split-container">
-        <div class="text-block">
+    <!-- TIMELINE ENTRIES - TEXT LEFT, IMAGE RIGHT -->
+    <div class="timeline-entry">
+        <div class="timeline-text">
             <h2>🏡 Back to the Province</h2>
             <p>I would first like to say that my time spent during Christmas and New Year's was fairly uneventful. I did what most Filipinos do - I went back to our provinces and visited my lola as well as my friends that I long have not seen in person.</p>
             <p>Not much had happened during my time at my hometown. It was relatively peaceful compared to La Trinidad. There was no constant noise from cars passing by, the days were always sunny, and people were just doing their everyday work with no rush. It felt like time was slower and people were content with life.</p>
         </div>
-        <div class="image-block">
-            🌾<br><small>Rice fields & hometown peace</small>
+        <div class="timeline-image">
+            🌾
+            <small>Rice fields & hometown peace</small>
         </div>
     </div>
 
-    <div class="split-container reverse">
-        <div class="text-block">
+    <div class="timeline-entry">
+        <div class="timeline-text">
             <h2>🎄 Christmas Family Dinner</h2>
             <p>When Christmas came, my family and cousins came together and I went and helped out in preparing food. It was nothing much, just some simple dinner like spaghetti, barbecues, and different kinds of cooked chicken to accommodate our picky younger cousins and elderly.</p>
             <p>When it came time to eat, my cousins and elders naturally came together and caught up with each other as they talked about their lives. The same goes for me and my cousins that are around my age as we discussed changes that happened at my hometown and stories of what they have previously been through.</p>
         </div>
-        <div class="image-block">
-            🍝<br><small>Spaghetti & family laughs</small>
+        <div class="timeline-image">
+            🍝
+            <small>Spaghetti & family laughs</small>
         </div>
     </div>
 
-    <div class="split-container">
-        <div class="text-block">
+    <div class="timeline-entry">
+        <div class="timeline-text">
             <h2>🏊 Surprise Baptism & Swim</h2>
             <p>After our party came to an end and some couple of days passed by, my cousin invited me to go on a swimming trip with them. Naturally, I agreed and went with them. What I did not know was that he was to be baptized as well so naturally I was a little shocked and surprised.</p>
             <p>After that happened we naturally enjoyed our time at the pool and went home. It was a perfect unexpected adventure during the holidays.</p>
         </div>
-        <div class="image-block">
-            💧<br><small>Pool day & baptism</small>
+        <div class="timeline-image">
+            💧
+            <small>Pool day & baptism</small>
         </div>
     </div>
 
-    <div class="split-container reverse">
-        <div class="text-block">
+    <div class="timeline-entry">
+        <div class="timeline-text">
             <h2>🥂 New Year's Reflection</h2>
             <p>While December passed by and the New Year came we had another party at my cousin's home. I had a productive discussion about what we wanted to do and the future and what our plans for this new year. After which I stayed at our house and played with my brothers to pass the days until school was near.</p>
         </div>
-        <div class="image-block">
-            🎇<br><small>New Year 2026</small>
+        <div class="timeline-image">
+            🎇
+            <small>New Year 2026</small>
         </div>
     </div>
 
-    <div class="split-container">
-        <div class="text-block">
+    <div class="timeline-entry">
+        <div class="timeline-text">
             <h2>✨ Why It Was Perfect</h2>
             <p>I wouldn't say that my time spent at my hometown was boring but it was a stress relief as I took back my time, slowed down, took care of my health, and talked to my friends and family that I have much neglected when I was at school focused on my academics.</p>
             <p>It was comforting to say the least that I had a much better vacation here in my hometown than staying at our house at La Trinidad playing games all day with nothing much to do. Thank you for reading my story and have a nice day.</p>
         </div>
-        <div class="image-block">
-            ❤️<br><small>Family time</small>
+        <div class="timeline-image">
+            ❤️
+            <small>Family time</small>
         </div>
     </div>
 
     <a href="index.html" class="back-home">← Back to Our Vacation Portfolio</a>
 
     <script>
-        // Animate sections on scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -214,10 +264,47 @@
                 }
             });
         });
-
-        document.querySelectorAll('.split-container').forEach(container => {
-            observer.observe(container);
+        document.querySelectorAll('.timeline-entry').forEach(entry => {
+            observer.observe(entry);
         });
     </script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+<script>
+let player;
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('bgMusic', {
+        events: {
+            'onReady': onPlayerReady
+        }
+    });
+}
+
+function onPlayerReady(event) {
+    event.target.playVideo();
+}
+
+function toggleMusic() {
+    const btn = document.getElementById('musicToggle');
+    
+    if (player && player.getPlayerState() === 1) { // Playing
+        player.pauseVideo();
+        btn.innerHTML = '🔇';
+        btn.style.background = 'linear-gradient(45deg, #666, #444)';
+    } else if (player) { // Paused
+        player.playVideo();
+        btn.innerHTML = '🔊';
+        btn.style.background = 'linear-gradient(45deg, #ff4757, #ffa502)';
+    }
+}
+
+// Auto-play on first interaction (browser policy)
+document.addEventListener('click', function startMusic() {
+    if (player && player.getPlayerState() !== 1) {
+        player.playVideo();
+        document.removeEventListener('click', startMusic);
+    }
+}, { once: true });
+</script>
 </body>
 </html>
