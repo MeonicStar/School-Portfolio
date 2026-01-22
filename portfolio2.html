@@ -22,38 +22,30 @@
             position: relative;
         }
 
-        /* VIDEO BACKGROUND */
-        .video-background {
+        /* IMAGE BACKGROUND - PASTE YOUR IMAGE URL IN THE url() BELOW */
+        .image-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -2;
-            overflow: hidden;
-        }
-
-        .video-background video {
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
+            background-image: url('YOUR-IMAGE-URL-HERE.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
 
         /* Dark overlay so text is readable */
-        .video-background::after {
+        .image-background::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
             z-index: 1;
         }
 
@@ -204,15 +196,10 @@
 </head>
 
 <body>
-    <!-- STEP 1: PASTE YOUR VIDEO URL IN THE src="" BELOW -->
-    <div class="video-background">
-        <video autoplay loop muted playsinline id="bg-video">
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
+    <!-- IMAGE BACKGROUND -->
+    <div class="image-background"></div>
 
-    <!-- STEP 2: PASTE YOUR YOUTUBE VIDEO ID IN THE src="" BELOW (replace rOWDEfnWx5s) -->
+    <!-- Background Music -->
     <iframe id="background-music" style="display:none;"
         src="https://www.youtube.com/embed/rOWDEfnWx5s?autoplay=1&loop=1&playlist=rOWDEfnWx5s&enablejsapi=1"
         allow="autoplay">
@@ -229,8 +216,8 @@
         <p class="subtitle">Welcome to Portfolio 2</p>
 
         <div class="content">
-            <p>Nayuta did nothing wrong</p>
-            <p>Yoru is a fraud</p>
+            <p>This is your Portfolio 2 page with background image and music!</p>
+            <p>Edit the content here to add your own text, images, or anything you want.</p>
         </div>
     </div>
 
